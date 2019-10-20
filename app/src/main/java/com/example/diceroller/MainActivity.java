@@ -11,16 +11,23 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-
+    EditText Number;
+    TextView Message, Counter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Number = findViewById(R.id.number);
+        Message = findViewById(R.id.message);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -59,9 +66,15 @@ public class MainActivity extends AppCompatActivity {
        TextView tv = this.findViewById(R.id.numberTextView);
 
        Random r = new Random();
-       int number = r.nextInt( (7-1) + 1);
-
+       int number = r.nextInt( 7-1)+1;
        tv.setText(Integer.toString(number));
+
+       if(Number.getText().toString().equals(tv.getText().toString())){
+           Toast.makeText(MainActivity.this,"Congratulations!!!",Toast.LENGTH_SHORT).show();
+           Message.setText("Congratulation!!!");
+       }else{
+           Message.setText("Not matched!!!");
+       }
 
     }
 }
