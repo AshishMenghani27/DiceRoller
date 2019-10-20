@@ -19,7 +19,8 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     EditText Number;
-    TextView Message, Counter;
+    TextView Message, Counter, tv;
+    int count;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
         Number = findViewById(R.id.number);
         Message = findViewById(R.id.message);
+        Counter = findViewById(R.id.counter);
+        tv = this.findViewById(R.id.numberTextView);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -40,7 +43,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    public void on_button_click(View view){
 
+        Random r = new Random();
+        int number = r.nextInt( 7-1)+1;
+        tv.setText(Integer.toString(number));
+
+        if(Number.getText().toString().equals(tv.getText().toString())){
+            Message.setText("Congratulation");
+            count++;
+            Counter.setText("Number of matched: " + count);
+        }else{
+            Message.setText("Not matched!!!");
+        }
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -62,19 +79,5 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    public void on_button_click(View view){
-       TextView tv = this.findViewById(R.id.numberTextView);
 
-       Random r = new Random();
-       int number = r.nextInt( 7-1)+1;
-       tv.setText(Integer.toString(number));
-
-       if(Number.getText().toString().equals(tv.getText().toString())){
-           Toast.makeText(MainActivity.this,"Congratulations!!!",Toast.LENGTH_SHORT).show();
-           Message.setText("Congratulation!!!");
-       }else{
-           Message.setText("Not matched!!!");
-       }
-
-    }
 }
